@@ -11,7 +11,8 @@
     var text = fig.querySelector("figcaption, h2");
     img.src = a.getAttribute("href");
     img.alt = a.querySelector("img").alt;
-    cap.textContent = text ? text.textContent : "";
+    var year = text && text.querySelector(".year");
+    cap.textContent = !text ? "" : year ? year.textContent + " · " + text.textContent.slice(year.textContent.length) : text.textContent;
     box.showModal();
   });
   box.addEventListener("click", function (e) {

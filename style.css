@@ -189,18 +189,21 @@ section h3:first-of-type { margin-top: 0; }
 .design-body .button { margin-top: auto; }
 .empty { color: var(--muted); }
 
-/* Lab gallery: two columns, photos keep their own proportions */
-.gallery { columns: 2; column-gap: 1.25rem; }
-.shot { break-inside: avoid; margin: 0 0 1.25rem; position: relative; }
+/* Lab gallery: two columns, newest first; .wide spans both */
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.25rem; align-items: start; }
+.shot { margin: 0; position: relative; min-width: 0; }
+.shot.wide { grid-column: 1 / -1; }
 .shot a { display: block; }
 .shot img { width: 100%; height: auto; border: 1px solid var(--rule); }
 .shot figcaption { font-size: var(--step--1); color: var(--muted); padding-top: 0.45rem; }
+.shot .year { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--accent); margin-right: 0.6rem; }
 @media (hover: hover) and (pointer: fine) {
   .shot figcaption {
-    position: absolute; left: 1px; right: 1px; bottom: 1px; padding: 2.5rem 1rem 0.85rem;
+    position: absolute; left: 1px; right: 1px; bottom: 1px; padding: 3rem 1rem 0.9rem;
     background: linear-gradient(transparent, var(--overlay)); color: var(--overlay-ink);
     opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
   }
+  .shot figcaption .year { color: var(--overlay-ink); opacity: 0.8; }
   .shot:hover figcaption, .shot:focus-within figcaption { opacity: 1; }
 }
 
@@ -222,7 +225,7 @@ section h3:first-of-type { margin-top: 0; }
   .path li { grid-template-columns: 1fr; gap: 0.1rem; }
   .links { grid-template-columns: 1fr; }
   .designs { grid-template-columns: 1fr; }
-  .gallery { columns: 1; }
+  .gallery { grid-template-columns: 1fr; }
   .ridge { height: 70px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
